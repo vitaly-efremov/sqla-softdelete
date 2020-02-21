@@ -8,3 +8,6 @@ class SoftDeleteQuery(Query):
             super(SoftDeleteQuery, obj).__init__(*args, **kwargs)
             return obj.filter_by(deleted=False)
         return obj
+
+    def filter(self, *criterion):
+        return super(SoftDeleteQuery, self).filter(*criterion)

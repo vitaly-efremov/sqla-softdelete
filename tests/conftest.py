@@ -1,9 +1,10 @@
 import pytest
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
 
+from query import SoftDeleteQuery
 from .database import Base
 from .database import DB_NAME
+from .database import Session
 
 
 @pytest.fixture(scope='session')
@@ -22,7 +23,7 @@ def tables(engine):
 def dbsession(engine, tables):
     connection = engine.connect()
     transaction = connection.begin()
-    session = Session(bind=connection)
+    session = Session(bind=connection, query_cls=SoftDeleteQuery)
 
     yield session
 
