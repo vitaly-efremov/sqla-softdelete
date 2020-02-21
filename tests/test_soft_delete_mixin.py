@@ -21,11 +21,11 @@ def test_query_all(dbsession):
 
 
 @pytest.mark.db
-def test_filter_not_deleted(dbsession):
+def test_get_all_not_deleted(dbsession):
     # Arrange
     account1 = Account(name='account1')
     account2 = Account(name='account2')
-    account1.deleted = True
+    account1.delete()
 
     dbsession.add_all([account1, account2])
     dbsession.flush()
@@ -35,6 +35,24 @@ def test_filter_not_deleted(dbsession):
 
     # Assert
     assert actual_accounts == [account2]
+
+
+@pytest.mark.db
+def test_filter_not_deleted(dbsession):
+    # Arrange
+    account1 = Account(name='account1')
+    account2 = Account(name='account2')
+    account3 = Account(name='account2')
+    account1.delete()
+
+    dbsession.add_all([account1, account2, account3])
+    dbsession.flush()
+
+    # Act
+    actual_accounts = dbsession.query(Account).filter(Account.name == 'account2').all()
+
+    # Assert
+    assert actual_accounts == [account2, account3]
 
 
 @pytest.mark.db
@@ -56,7 +74,7 @@ def test_get_not_deleted(dbsession):
 def test_get_deleted(dbsession):
     # Arrange
     account = Account(name='account')
-    account.deleted = True
+    account.delete()
 
     dbsession.add(account)
     dbsession.flush()
