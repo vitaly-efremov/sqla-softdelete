@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
   name='sqla-softdelete',
   packages=['sqla-softdelete'],
-  version='0.1',
+  version='1.0',
   license='GPLv3+',
   description='SQLAlchemy soft delete',
   author='Vitaly Efremov',
