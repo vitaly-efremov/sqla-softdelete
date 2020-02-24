@@ -3,12 +3,12 @@ import sqlalchemy as sa
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-from soft_delete_mixin import SoftDeleteMixin
+from sqla_softdelete import SoftDeleteMixin
 from .database import Base
 from .database import DB_NAME
 
 
-class Account(Base, SoftDeleteMixin):
+class Account(SoftDeleteMixin, Base):
     __tablename__ = 'account'
 
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)

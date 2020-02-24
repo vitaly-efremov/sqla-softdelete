@@ -1,2 +1,36 @@
 # sqla-softdelete
-Soft delete for SQLAlchemy
+Soft delete for SQLAlchemy ORM
+
+How to install
+------------  
+```
+  pip install -r requirements.txt
+```
+
+How to use
+------------    
+To make your SQLAlchemy model (entity) support just inherit it from `SoftDeleteMixin`. 
+For instance:
+```python
+from sqla_softdelete import SoftDeleteMixin
+
+
+class Account(SoftDeleteMixin, Base):
+    __tablename__ = 'account'
+
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    name = sa.Column(sa.Text, nullable=False)
+    email = sa.Column(sa.String(128), nullable=False, index=True)
+
+    def __init__(self, name: str = '', email: str = '', phone: str = ''):
+        self.name = name
+        self.email = email
+        self.phone = phone
+
+    def __repr__(self):
+        return f'Account(id={self.id}, name={self.name}, email={self.email})'
+
+    def __str__(self):
+        return f'{self.name}: {self.email})'
+```
+ 
