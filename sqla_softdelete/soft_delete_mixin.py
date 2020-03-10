@@ -12,6 +12,9 @@ class SoftDeleteMixin:
     def delete(self, deleted_at: datetime = None):
         self.deleted_at = deleted_at or datetime.now()
 
+    def restore(self):
+        self.deleted_at = None
+
 
 @event.listens_for(Query, 'before_compile', retval=True)
 def before_compile(query):

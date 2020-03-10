@@ -1,10 +1,10 @@
 # sqla-softdelete
-Soft delete for SQLAlchemy ORM
+Simple soft delete for SQLAlchemy ORM
 
 How to install
 ------------  
 ```
-  pip install -r requirements.txt
+  pip install -r sqla-softdelete
 ```
 
 How to use
@@ -33,4 +33,17 @@ class Account(SoftDeleteMixin, Base):
     def __str__(self):
         return f'{self.name}: {self.email})'
 ```
- 
+
+All set now.
+```python
+    account = Account(name='account')
+    
+    Session.add(account)
+    Session.flush()
+    
+    account.delete()
+    Session.expire(account)
+
+    actual_accounts = dbsession.query(Account).all() 
+    print(f'Actual accounts: {actual_accounts}')
+```
