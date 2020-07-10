@@ -4,7 +4,7 @@ Simple soft delete for SQLAlchemy ORM
 How to install
 ------------  
 ```
-  pip install -r sqla-softdelete
+  pip install sqla-softdelete
 ```
 
 How to use
