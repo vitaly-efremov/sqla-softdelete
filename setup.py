@@ -18,7 +18,6 @@ setup(
     keywords=['SQLAlchemy', 'Soft delete'],
     install_requires=[
         'sqlalchemy',
-        'pytest',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
